@@ -20,6 +20,11 @@ class TwitchApi:
         req = requests.request('GET', url + queryString)
         return req.text
 
+    def getViewers(self, channel):
+        url = "https://tmi.twitch.tv/group/user/%s/chatters" % channel
+        queryString = ""
+        req = requests.request('GET', url + queryString)
+        return req.text
 
 if __name__ == "__main__":
     twitchApi = TwitchApi()
