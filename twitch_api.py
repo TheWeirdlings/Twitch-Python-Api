@@ -1,5 +1,6 @@
 import requests
 import json
+import config
 
 class TwitchApi:
     def __init__(self):
@@ -11,13 +12,17 @@ class TwitchApi:
             print("Channel is required")
             return
 
-        url = self.rootApiUrl + "/channels/%s/follows" % channel
+        url = self.rootApiUrl + "channels/%s/follows" % channel
         queryString = "?limit=%s&direction=%s" % (limit, direction)
 
         if cursor is not None:
             queryString += "&cursor=%s" % cursor
 
-        req = requests.request('GET', url + queryString)
+        headers = {
+            'Client-ID': config.twitchClientID
+        }
+
+        req = requests.get(url + queryString, headers=headers)
         return req.text
 
     def getViewers(self, channel):
@@ -30,7 +35,8 @@ if __name__ == "__main__":
     twitchApi = TwitchApi()
     followers = twitchApi.getFollowers('weirdlings')
     followers = json.loads(followers)
-    print followers['_cursor']
+    print(followers)
+    print(followers['_cursor'])
 
     for follower in followers['follows']:
-        print follower['user']['display_name']
+        print(follower['user']['display_name'])
