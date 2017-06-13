@@ -1,21 +1,7 @@
 import requests
 import json
 import config
-
-class StreamApi:
-    def __init__(self, rootApiUrl):
-        self.rootApiUrl = rootApiUrl
-
-    def getStreams(self, channelId):
-        url = self.rootApiUrl + "streams/%s" % channelId
-        queryString = ""
-
-        headers = {
-            'Client-ID': config.twitchClientID
-        }
-
-        req = requests.request('GET', url + queryString, headers=headers)
-        return req.text
+from lib.Streams import StreamApi
 
 class TwitchApi:
     def __init__(self):
@@ -71,10 +57,27 @@ class TwitchApi:
 
 if __name__ == "__main__":
     twitchApi = TwitchApi()
-    followers = twitchApi.streams.getStreams('thehollidayinn')
+    followers = twitchApi.streams.getStreamsByUser('thehollidayinn')
     followers = json.loads(followers)
     print(followers)
-    print(followers['_cursor'])
 
-    for follower in followers['follows']:
-        print(follower['user']['display_name'])
+    # followers = twitchApi.streams.getStreams()
+    # followers = json.loads(followers)
+    # print(followers)
+
+    # followers = twitchApi.streams.getStreamsSummary()
+    # followers = json.loads(followers)
+    # print(followers)
+
+    # followers = twitchApi.streams.getFeaturedStreams()
+    # followers = json.loads(followers)
+    # print(followers)
+
+    # followers = twitchApi.streams.getFollowedStreams()
+    # followers = json.loads(followers)
+    # print(followers)
+
+    # print(followers['_cursor'])
+    #
+    # for follower in followers['follows']:
+    #     print(follower['user']['display_name'])
