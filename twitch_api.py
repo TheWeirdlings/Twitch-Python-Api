@@ -2,11 +2,13 @@ import requests
 import json
 import config
 from lib.Streams import StreamApi
+from lib.Bits import BitsApi
 
 class TwitchApi:
     def __init__(self):
         self.rootApiUrl = "https://api.twitch.tv/kraken/"
         self.streams = StreamApi(self.rootApiUrl)
+        self.bits = BitsApi(self.rootApiUrl)
 
     def getFollowers(self, channel = None, cursor = None, limit = 25, direction = 'desc'):
         if channel is None:
@@ -57,7 +59,7 @@ class TwitchApi:
 
 if __name__ == "__main__":
     twitchApi = TwitchApi()
-    followers = twitchApi.streams.getStreamsByUser('thehollidayinn')
+    followers = twitchApi.bits.getStreamsByUser('thehollidayinn')
     followers = json.loads(followers)
     print(followers)
 
