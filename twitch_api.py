@@ -4,13 +4,15 @@ import config
 from lib.Streams import StreamApi
 from lib.Bits import BitsApi
 from lib.ChannelFeeds import ChannelFeedsApi
+from lib.Chat import ChatApi
 
 class TwitchApi:
     def __init__(self):
         self.rootApiUrl = "https://api.twitch.tv/kraken/"
         self.streams = StreamApi(self.rootApiUrl)
         self.bits = BitsApi(self.rootApiUrl)
-        self.bits = ChannelFeedsApi(self.rootApiUrl)
+        self.channels = ChannelFeedsApi(self.rootApiUrl)
+        self.chat = ChatApi(self.rootApiUrl)
 
     def getFollowers(self, channel = None, cursor = None, limit = 25, direction = 'desc'):
         if channel is None:
