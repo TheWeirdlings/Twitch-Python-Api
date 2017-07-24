@@ -10,7 +10,7 @@ class ChannelFeedsApi:
         }
 
     def getChannel(self):
-        url = self.rootApiUrl + "/channel/
+        url = self.rootApiUrl + "/channel/"
         req = requests.request('GET', url, headers=self.headers)
         return req.text
 
