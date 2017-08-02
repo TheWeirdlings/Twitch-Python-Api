@@ -6,6 +6,7 @@ from lib.Bits import BitsApi
 from lib.ChannelFeeds import ChannelFeedsApi
 from lib.Chat import ChatApi
 from lib.Clips import ClipsApi
+from lib.Teams import TeamsApi
 
 class TwitchApi:
     def __init__(self):
@@ -15,6 +16,7 @@ class TwitchApi:
         self.channels = ChannelFeedsApi(self.rootApiUrl)
         self.chat = ChatApi(self.rootApiUrl)
         self.clips = ClipsApi(self.rootApiUrl)
+        self.teams = TeamsApi(Self.rootApiUrl)
 
     def getFollowers(self, channel = None, cursor = None, limit = 25, direction = 'desc'):
         if channel is None:
